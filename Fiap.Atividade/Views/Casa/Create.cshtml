@@ -1,0 +1,24 @@
+﻿@model Fiap.Atividade.ViewModel.CasaCreateViewModel
+<h1>Casa</h1>
+<h4>Novo</h4>
+<hr />
+<div class="row">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="col-md-4">
+        <!-- IMPORTANTE elemento form -->
+        <form asp-action="Create" asp-controller="Casa">
+            <div class="form-group">
+                <label asp-for="Localizacao" class="control-label"></label>
+                <input asp-for="Localizacao" class="form-control" />
+                <span asp-validation-for="Localizacao" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>

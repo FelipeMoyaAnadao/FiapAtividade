@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Fiap.Atividade.Models.SistemaAlarmeModel>
+<h1>Sistema de Alarme</h1>
+@if (!string.IsNullOrEmpty((String)TempData["mensagemSucesso"]))
+{
+    <div class="alert alert-warning" role="alert">@TempData["mensagemSucesso"]</div>
+}
+<p>
+    <a asp-controller="SistemaAlarme" asp-action="Create">Novo sistema de alarme</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>nome</th>
+            <th>local</th>
+            <th>tipo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <label>@item.SistemaAlarmeId</label>
+                </td>
+                <td>
+                    <label>@item.Nome</label>
+                </td>
+                <td>
+                    <label>@item.Localizacao</label>
+                </td>
+                <td>
+                    <label>@item.Tipo</label>
+                </td>
+                <td>
+                    <a asp-controller="SistemaAlarme"
+                       asp-action="Delete"
+                       asp-route-id="@item.SistemaAlarmeId">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

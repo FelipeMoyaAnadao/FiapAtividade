@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Fiap.Atividade.Models.CasaModel>
+<h1>Casas</h1>
+@if (!string.IsNullOrEmpty((String)TempData["mensagemSucesso"]))
+{
+    <div class="alert alert-warning" role="alert">@TempData["mensagemSucesso"]</div>
+}
+<p>
+    <a asp-controller="Casa" asp-action="Create">Nova Casa</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Localizacao</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <label>@item.CasaId</label>
+                </td>
+                <td>
+                    <label>@item.Localizacao</label>
+                </td>
+                <td>
+                    <a asp-controller="Casa"
+                       asp-action="Edit"
+                       asp-route-id="@item.CasaId">Editar</a>
+                    <a asp-controller="Casa"
+                       asp-action="Delete"
+                       asp-route-id="@item.CasaId">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

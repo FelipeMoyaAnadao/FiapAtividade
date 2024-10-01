@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  app:
+    image: fiap_atividade:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__OracleConnection="User Id=system;Password=DtNasc#200105;Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=db)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=xe)))"
+    depends_on:
+      - db
+    networks:
+      - fiap_network
+
+  db:
+    image: oracleinanutshell/oracle-xe-11g
+    ports:
+      - "1521:1521"
+    environment:
+      - ORACLE_PASSWORD=DtNasc#200105
+      - ORACLE_ALLOW_REMOTE=true
+    networks:
+      - fiap_network
+
+networks:
+  fiap_network:
+    driver: bridge

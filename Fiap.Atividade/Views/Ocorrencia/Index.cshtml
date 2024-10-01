@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Fiap.Atividade.Models.OcorrenciaModel>
+<h1>Ocorrencia</h1>
+@if (!string.IsNullOrEmpty((String)TempData["mensagemSucesso"]))
+{
+    <div class="alert alert-warning" role="alert">@TempData["mensagemSucesso"]</div>
+}
+<p>
+    <!-- uso de TagHelpers para definir o Controller e a Action -->
+    <a asp-controller="Ocorrencia" asp-action="Create">Nova ocorrencia</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>dia ocorrencia</th>
+            <th>desc</th>
+            <th>tipo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <label>@item.OcorrenciaId</label>
+                </td>
+                <td>
+                    <label>@item.DiaOcorrencia</label>
+                </td>
+                <td>
+                    <label>@item.Descricao</label>
+                </td>
+                <td>
+                    <label>@item.Tipo</label>
+                </td>
+                <td>
+                    <a asp-controller="Ocorrencia"
+                       asp-action="Delete"
+                       asp-route-id="@item.OcorrenciaId">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
