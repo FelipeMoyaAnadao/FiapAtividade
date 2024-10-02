@@ -1,11 +1,12 @@
-name: First .NET Core CI Workflow
+name: .NET Core CI Workflow 1.0
 
 on: push
 
 jobs:
-  build:
+
+  ambient: 
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -22,7 +23,12 @@ jobs:
         run: echo "Restaurando as dependências do projeto"
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore 
+
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
 
       - name: Display message - Building the project
         run: echo "Iniciando a build do projeto"
@@ -30,6 +36,19 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
+      - name: Display message - Running tests
+        run: echo "Build realizado com sucesso. Agora executando os testes."
+
+      - name: Test
+        run: dotnet test --no-restore --verbosity normal
+
+      - name: Display message - Pipeline completed
+        run: echo "Pipeline concluído com sucesso!"
+
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
       - name: Display message - Running tests
         run: echo "Build realizado com sucesso. Agora executando os testes."
 
